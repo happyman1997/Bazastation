@@ -98,6 +98,13 @@ ADMIN_VERB(secrets, R_NONE, "Secrets", "Abuse harder than you ever have before w
 					var/datum/disease/D = thing
 					D.cure(0)
 
+		if("no_nations")
+			GLOB.no_nations -= !GLOB.no_nations
+			if(GLOB.no_nations)
+				message_admins("[key_name_admin(holder)] deactivate nations.")
+			else
+				message_admins("[key_name_admin(holder)] activate nations.")
+
 		if("list_bombers")
 			holder.holder.list_bombers()
 

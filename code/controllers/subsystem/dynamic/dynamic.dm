@@ -8,6 +8,8 @@
 GLOBAL_VAR_INIT(dynamic_no_stacking, TRUE)
 // If enabled does not accept or execute any rulesets.
 GLOBAL_VAR_INIT(dynamic_forced_extended, FALSE)
+// If enabled does not make roundstart nations.
+GLOBAL_VAR_INIT(no_nations, FALSE)
 // How high threat is required for HIGH_IMPACT_RULESETs stacking.
 // This is independent of dynamic_no_stacking.
 GLOBAL_VAR_INIT(dynamic_stacking_limit, 90)
@@ -698,6 +700,12 @@ SUBSYSTEM_DEF(dynamic)
 	var/list/drafted_rules = list()
 	for (var/datum/dynamic_ruleset/roundstart/rule in roundstart_rules)
 		if (!rule.weight)
+			continue
+		if(istype(rule, /datum/dynamic_ruleset/roundstart/nations))
+			if(GLOB.no_nations)
+				continue
+			rule.candidates = candidates.Copy()
+			drafted_rules[rule] = rule.weight
 			continue
 		if (rule.acceptable(roundstart_pop_ready, threat_level) && round_start_budget >= rule.cost) // If we got the population and threat required
 			rule.candidates = candidates.Copy()

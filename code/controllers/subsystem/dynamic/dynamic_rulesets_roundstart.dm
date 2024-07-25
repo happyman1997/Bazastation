@@ -674,10 +674,10 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 /// Ruleset for Nations
 /datum/dynamic_ruleset/roundstart/nations
 	name = "Nations"
-	required_candidates = 0
-	weight = 0 //admin only (and for good reason)
-	cost = 0
-	flags = LONE_RULESET | ONLY_RULESET
+	required_candidates = 1
+	weight = 1000 //happy happy happy
+	cost = 1
+	flags = LONE_RULESET
 
 /datum/dynamic_ruleset/roundstart/nations/execute()
 	. = ..()
