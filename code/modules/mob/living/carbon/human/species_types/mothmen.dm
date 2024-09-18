@@ -28,6 +28,11 @@
 		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/moth,
 	)
 
+/datum/species/moth/on_species_gain(mob/living/carbon/human/human_who_gained_species, datum/species/old_species, pref_load)
+	. = ..()
+	var/datum/action/cooldown/spell/honey_prodaction/for_me = new /datum/action/cooldown/spell/honey_prodaction()
+	for_me.Grant(human_who_gained_species)
+
 /datum/species/moth/regenerate_organs(mob/living/carbon/C, datum/species/old_species, replace_current= TRUE, list/excluded_zones, visual_only)
 	. = ..()
 	if(ishuman(C))
@@ -155,3 +160,24 @@
 	)
 
 	return to_add
+
+/datum/action/cooldown/spell/honey_prodaction
+	name = "Honey Prodaction"
+	desc = "Сreates pink honeycombs that contain beer. Wastes nutriments."
+	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon_state = "honey_prodaction"
+	spell_requirements = null
+	cooldown_time = 30 SECONDS
+
+/datum/action/cooldown/spell/honey_prodaction/cast(atom/cast_on)
+	. = ..()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/im_not_human_im_moth = owner
+	im_not_human_im_moth.adjust_nutrition(-100)
+	if(!do_after(im_not_human_im_moth, 5 SECONDS))
+		to_chat(im_not_human_im_moth, span_notice("Need to stand still"))
+		return
+	new /obj/item/food/honeycomb/moth (get_turf(cast_on))
+	playsound(im_not_human_im_moth, 'sound/voice/moth/moth_laugh1.ogg', 75, TRUE, frequency = -1)
+
