@@ -9,6 +9,7 @@
 	preserved_food = TRUE
 	starting_reagent_purity = 1
 	var/honey_color = ""
+	var/permanent_color = FALSE
 
 /obj/item/food/honeycomb/Initialize(mapload)
 	. = ..()
@@ -26,9 +27,20 @@
 /obj/item/food/honeycomb/proc/set_reagent(reagent)
 	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent]
 	if(istype(R))
-		name = "honeycomb ([R.name])"
-		honey_color = R.color
+		name = "[name] ([R.name])"
+		if(!permanent_color)
+			honey_color = R.color
 		reagents.add_reagent(R.type,5)
 	else
 		honey_color = ""
 	update_appearance()
+
+/obj/item/food/honeycomb/moth
+	name = "pink honeycomb"
+	desc = "Sticky honey that smells like beer"
+	honey_color = COLOR_FADED_PINK
+	permanent_color = TRUE
+
+/obj/item/food/honeycomb/moth/Initialize(mapload)
+	. = ..()
+	set_reagent(/datum/reagent/consumable/ethanol/beer)
