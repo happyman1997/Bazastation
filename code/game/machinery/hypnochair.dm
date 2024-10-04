@@ -63,7 +63,7 @@
 
 	return data
 
-/obj/machinery/hypnochair/ui_act(action, params)
+/obj/machinery/hypnochair/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
@@ -91,11 +91,11 @@
 
 /obj/machinery/hypnochair/proc/interrogate()
 	if(!trigger_phrase)
-		playsound(get_turf(src), 'sound/machines/buzz-sigh.ogg', 25, TRUE)
+		playsound(get_turf(src), 'sound/machines/buzz/buzz-sigh.ogg', 25, TRUE)
 		return
 	var/mob/living/carbon/C = occupant
 	if(!istype(C))
-		playsound(get_turf(src), 'sound/machines/buzz-sigh.ogg', 25, TRUE)
+		playsound(get_turf(src), 'sound/machines/buzz/buzz-sigh.ogg', 25, TRUE)
 		return
 	victim = C
 	if(C.get_eye_protection() <= 0)
