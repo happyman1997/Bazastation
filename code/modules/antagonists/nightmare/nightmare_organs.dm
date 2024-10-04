@@ -65,10 +65,9 @@
 /obj/item/organ/internal/heart/nightmare
 	name = "heart of darkness"
 	desc = "An alien organ that twists and writhes when exposed to light."
-	visual = TRUE
 	icon_state = "demon_heart-on"
 	base_icon_state = "demon_heart"
-
+	visual = TRUE
 	color = COLOR_CRAYON_BLACK
 	decay_factor = 0
 	// No love is to be found in a heart so twisted.
@@ -85,7 +84,7 @@
 		span_warning("[user] raises [src] to [user.p_their()] mouth and tears into it with [user.p_their()] teeth!"),
 		span_danger("[src] feels unnaturally cold in your hands. You raise [src] to your mouth and devour it!")
 	)
-	playsound(user, 'sound/effects/magic/demon_consume.ogg', 50, TRUE)
+	playsound(user, 'sound/magic/demon_consume.ogg', 50, TRUE)
 
 	user.visible_message(
 		span_warning("Blood erupts from [user]'s arm as it reforms into a weapon!"),
@@ -131,7 +130,7 @@
 		to_chat(owner, span_userdanger("You feel the shadows invade your skin, leaping into the center of your chest! You're alive!"))
 		SEND_SOUND(owner, sound('sound/effects/ghost.ogg'))
 	owner.visible_message(span_warning("[owner] staggers to [owner.p_their()] feet!"))
-	playsound(owner, 'sound/effects/hallucinations/far_noise.ogg', 50, TRUE)
+	playsound(owner, 'sound/hallucinations/far_noise.ogg', 50, TRUE)
 	respawn_progress = 0
 
 /obj/item/organ/internal/heart/nightmare/get_availability(datum/species/owner_species, mob/living/owner_mob)

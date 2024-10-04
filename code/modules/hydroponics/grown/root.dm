@@ -1,6 +1,6 @@
 // Carrot
 /obj/item/seeds/carrot
-	name = "carrot seed pack"
+	name = "pack of carrot seeds"
 	desc = "These seeds grow into carrots."
 	icon_state = "seed-carrot"
 	species = "carrot"
@@ -45,7 +45,7 @@
 
 // Parsnip
 /obj/item/seeds/carrot/parsnip
-	name = "parsnip seed pack"
+	name = "pack of parsnip seeds"
 	desc = "These seeds grow into parsnips."
 	icon_state = "seed-parsnip"
 	species = "parsnip"
@@ -85,7 +85,7 @@
 
 // Cahn'root
 /obj/item/seeds/carrot/cahnroot
-	name = "cahn'root seed pack"
+	name = "pack of cahn'root seeds"
 	desc = "These seeds grow into cahn'roots."
 	icon_state = "seed-cahn'root"
 	species = "cahn'root"
@@ -130,7 +130,7 @@
 
 // White-Beet
 /obj/item/seeds/whitebeet
-	name = "white-beet seed pack"
+	name = "pack of white-beet seeds"
 	desc = "These seeds grow into sugary beet producing plants."
 	icon_state = "seed-whitebeet"
 	species = "whitebeet"
@@ -156,7 +156,7 @@
 
 // Red Beet
 /obj/item/seeds/redbeet
-	name = "redbeet seed pack"
+	name = "pack of redbeet seeds"
 	desc = "These seeds grow into red beet producing plants."
 	icon_state = "seed-redbeet"
 	species = "redbeet"

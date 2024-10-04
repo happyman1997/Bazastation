@@ -1,6 +1,6 @@
 // Pineapple!
 /obj/item/seeds/pineapple
-	name = "pineapple seed pack"
+	name = "pack of pineapple seeds"
 	desc = "Oooooooooooooh!"
 	icon_state = "seed-pineapple"
 	species = "pineapple"
@@ -23,7 +23,7 @@
 	bite_consumption_mod = 2
 	force = 4
 	throwforce = 8
-	hitsound = 'sound/items/weapons/bladeslice.ogg'
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb_continuous = list("stings", "pines")
 	attack_verb_simple = list("sting", "pine")
 	throw_speed = 1

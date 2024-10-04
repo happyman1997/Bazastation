@@ -27,7 +27,7 @@
 	obj_damage = 50
 	melee_damage_lower = 20
 	melee_damage_upper = 20
-	attack_sound = 'sound/items/weapons/bite.ogg'
+	attack_sound = 'sound/weapons/bite.ogg'
 	attack_vis_effect = ATTACK_EFFECT_BITE
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
@@ -44,8 +44,6 @@
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = 1500
 
-	/// If true we will run away from attackers even at full health
-	var/cowardly = FALSE
 	/// Cytology cells you can swab from this creature
 	var/cell_line = CELL_LINE_TABLE_CARP
 	/// What colour is our 'healing' outline?
@@ -90,8 +88,7 @@
 	if (cell_line)
 		AddElement(/datum/element/swabable, cell_line, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
 	AddElement(/datum/element/simple_flying)
-	if (!cowardly)
-		AddElement(/datum/element/ai_flee_while_injured)
+	AddElement(/datum/element/ai_flee_while_injured)
 	setup_eating()
 
 	AddComponent(/datum/component/aggro_emote, emote_list = string_list(list("gnashes")))
@@ -270,8 +267,8 @@
 
 ///Wild carp that just vibe ya know
 /mob/living/basic/carp/passive
-	name = "false carp"
-	desc = "A close relative of the space carp which is entirely toothless and feeds by stealing its cousin's leftovers."
+	name = "passive carp"
+	desc = "A timid, sucker-bearing creature that resembles a fish. "
 
 	icon_state = "base_friend"
 	icon_living = "base_friend"
@@ -281,19 +278,11 @@
 	attack_verb_continuous = "suckers"
 	attack_verb_simple = "suck"
 
-	melee_damage_lower = 0
-	melee_damage_upper = 0
-	cowardly = TRUE
+	melee_damage_lower = 4
+	melee_damage_upper = 4
 	ai_controller = /datum/ai_controller/basic_controller/carp/passive
-	gold_core_spawnable = FRIENDLY_SPAWN
 
 /mob/living/basic/carp/passive/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/ai_retaliate_advanced, CALLBACK(src, PROC_REF(on_attacked)))
+	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/pet_bonus, "bloops happily!")
-	ADD_TRAIT(src, TRAIT_PACIFISM, INNATE_TRAIT)
-
-/// If someone slaps one of the school, scatter
-/mob/living/basic/carp/passive/proc/on_attacked(mob/living/attacker)
-	for(var/mob/living/basic/carp/passive/schoolmate in oview(src, 9))
-		schoolmate.ai_controller?.insert_blackboard_key_lazylist(BB_BASIC_MOB_RETALIATE_LIST, attacker)

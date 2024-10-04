@@ -1,3 +1,4 @@
+
 /obj/item/kirbyplants
 	name = "potted plant"
 	icon = 'icons/obj/fluff/flora/plants.dmi'

@@ -214,7 +214,7 @@
 			break
 	return data
 
-/obj/machinery/status_display/door_timer/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+/obj/machinery/status_display/door_timer/ui_act(action, params)
 	. = ..()
 	if(.)
 		return

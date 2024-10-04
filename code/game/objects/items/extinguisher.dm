@@ -5,7 +5,7 @@
 	icon_state = "fire_extinguisher0"
 	worn_icon_state = "fire_extinguisher"
 	inhand_icon_state = "fire_extinguisher"
-	hitsound = 'sound/items/weapons/smash.ogg'
+	hitsound = 'sound/weapons/smash.ogg'
 	obj_flags = CONDUCTS_ELECTRICITY
 	throwforce = 10
 	w_class = WEIGHT_CLASS_NORMAL
@@ -207,15 +207,13 @@
 	else
 		return FALSE
 
-/obj/item/extinguisher/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(interacting_with.loc == user)
-		return NONE
-	// Always skip interaction if it's a bag or table (that's not on fire)
-	if(!(interacting_with.resistance_flags & ON_FIRE) && HAS_TRAIT(interacting_with, TRAIT_COMBAT_MODE_SKIP_INTERACTION))
-		return NONE
-	return ranged_interact_with_atom(interacting_with, user, modifiers)
-
 /obj/item/extinguisher/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	return interact_with_atom(interacting_with, user, modifiers)
+
+/obj/item/extinguisher/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if (interacting_with.loc == user)
+		return NONE
+
 	if(refilling)
 		refilling = FALSE
 		return NONE

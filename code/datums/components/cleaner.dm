@@ -62,9 +62,6 @@
 /datum/component/cleaner/proc/on_interaction(datum/source, mob/living/user, atom/target, list/modifiers)
 	SIGNAL_HANDLER
 
-	if(isitem(source) && SHOULD_SKIP_INTERACTION(target, source, user))
-		return NONE
-
 	// By default, give XP
 	var/give_xp = TRUE
 	if(pre_clean_callback)

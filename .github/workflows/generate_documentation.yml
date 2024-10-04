@@ -27,9 +27,10 @@ jobs:
           touch dmdoc/.nojekyll
           echo codedocs.tgstation13.org > dmdoc/CNAME
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          branch: gh-pages
-          clean: true
-          single-commit: true
-          folder: dmdoc
+          BRANCH: gh-pages
+          CLEAN: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SINGLE_COMMIT: true
+          FOLDER: dmdoc

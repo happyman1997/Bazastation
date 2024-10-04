@@ -41,7 +41,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/atom/movable/screen/rest_icon
 	var/atom/movable/screen/throw_icon
 	var/atom/movable/screen/module_store_icon
-	var/atom/movable/screen/floor_change
 
 	var/list/static_inventory = list() //the screen objects which are static
 	var/list/toggleable_inventory = list() //the screen objects which can be hidden
@@ -229,7 +228,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	zone_select = null
 	pull_icon = null
 	rest_icon = null
-	floor_change = null
 	hand_slots.Cut()
 
 	QDEL_LIST(toggleable_inventory)
@@ -421,11 +419,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 		return
 	update_robot_modules_display()
 
-/datum/hud/new_player/show_hud(version = 0, mob/viewmob)
-	. = ..()
-	if(.)
-		show_station_trait_buttons()
-
 /datum/hud/proc/hidden_inventory_update()
 	return
 
@@ -591,7 +584,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	listed_actions.check_against_view()
 	palette_actions.check_against_view()
 	for(var/atom/movable/screen/movable/action_button/floating_button as anything in floating_actions)
-		var/list/current_offsets = screen_loc_to_offset(floating_button.screen_loc, our_view)
+		var/list/current_offsets = screen_loc_to_offset(floating_button.screen_loc)
 		// We set the view arg here, so the output will be properly hemm'd in by our new view
 		floating_button.screen_loc = offset_to_screen_loc(current_offsets[1], current_offsets[2], view = our_view)
 

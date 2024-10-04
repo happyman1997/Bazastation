@@ -17,7 +17,6 @@
 	desc = "advanced clown shoes that protect the wearer and render them nearly immune to slipping on their own peels. They also squeak at 100% capacity."
 	clothing_traits = list(TRAIT_NO_SLIP_WATER)
 	slowdown = SHOES_SLOWDOWN
-	body_parts_covered = FEET|LEGS
 	armor_type = /datum/armor/clown_shoes_combat
 	strip_delay = 70
 	resistance_flags = NONE
@@ -50,7 +49,6 @@
 	strip_delay = 70
 	resistance_flags = NONE
 	always_noslip = TRUE
-	body_parts_covered = FEET|LEGS
 
 /datum/armor/banana_shoes_combat
 	melee = 25
@@ -194,7 +192,7 @@
 //BOMBANANA
 
 /obj/item/seeds/banana/bombanana
-	name = "bombanana seed pack"
+	name = "pack of bombanana seeds"
 	desc = "They're seeds that grow into bombanana trees. When grown, give to the clown."
 	plantname = "Bombanana Tree"
 	product = /obj/item/food/grown/banana/bombanana

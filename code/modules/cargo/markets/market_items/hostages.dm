@@ -5,7 +5,6 @@
 	stock = 1
 	availability_prob = 100
 	shipping_override = list(SHIPPING_METHOD_LTSRBT = 0, SHIPPING_METHOD_SUPPLYPOD = 350)
-	restockable = FALSE
 	/// temporary reference to the 4 in 7 chances of signaler and electropack.
 	var/obj/item/assembly/signaler/signaler
 

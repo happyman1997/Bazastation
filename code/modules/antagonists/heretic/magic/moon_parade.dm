@@ -7,11 +7,11 @@
 	button_icon_state = "moon_parade"
 	ranged_mousepointer = 'icons/effects/mouse_pointers/moon_target.dmi'
 
-	sound = 'sound/effects/magic/cosmic_energy.ogg'
+	sound = 'sound/magic/cosmic_energy.ogg'
 	school = SCHOOL_FORBIDDEN
 	cooldown_time = 30 SECONDS
 
-	invocation = "L'N'R P'RAD"
+	invocation = "Tsiyun' levani!"
 	invocation_type = INVOCATION_SHOUT
 	spell_requirements = NONE
 

@@ -1,6 +1,7 @@
 /obj/item/organ/internal/vocal_cords //organs that are activated through speech with the :x/MODE_KEY_VOCALCORDS channel
 	name = "vocal cords"
 	icon_state = "appendix"
+	visual = FALSE
 	zone = BODY_ZONE_PRECISE_MOUTH
 	slot = ORGAN_SLOT_VOICE
 	gender = PLURAL
@@ -60,7 +61,7 @@
 	. = ..()
 	if(!.)
 		return
-	var/command = tgui_input_text(owner, "Speak with the Voice of God", "Command", max_length = MAX_MESSAGE_LEN)
+	var/command = tgui_input_text(owner, "Speak with the Voice of God", "Command")
 	if(!command)
 		return
 	if(QDELETED(src) || QDELETED(owner))
@@ -78,7 +79,7 @@
 	return owner.can_speak()
 
 /obj/item/organ/internal/vocal_cords/colossus/handle_speech(message)
-	playsound(get_turf(owner), 'sound/effects/magic/clockwork/invoke_general.ogg', 300, TRUE, 5)
+	playsound(get_turf(owner), 'sound/magic/clockwork/invoke_general.ogg', 300, TRUE, 5)
 	return //voice of god speaks for us
 
 /obj/item/organ/internal/vocal_cords/colossus/speak_with(message)
@@ -86,6 +87,7 @@
 	next_command = world.time + (cooldown * cooldown_mod)
 
 /obj/item/organ/internal/adamantine_resonator
+	visual = FALSE
 	name = "adamantine resonator"
 	desc = "Fragments of adamantine exist in all golems, stemming from their origins as purely magical constructs. These are used to \"hear\" messages from their leaders."
 	zone = BODY_ZONE_HEAD
@@ -101,7 +103,7 @@
 /datum/action/item_action/organ_action/use/adamantine_vocal_cords/Trigger(trigger_flags)
 	if(!IsAvailable(feedback = TRUE))
 		return
-	var/message = tgui_input_text(owner, "Resonate a message to all nearby golems", "Resonate", max_length = MAX_MESSAGE_LEN)
+	var/message = tgui_input_text(owner, "Resonate a message to all nearby golems", "Resonate")
 	if(!message)
 		return
 	if(QDELETED(src) || QDELETED(owner))

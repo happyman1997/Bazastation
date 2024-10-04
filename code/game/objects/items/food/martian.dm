@@ -102,7 +102,6 @@
 	desc = "A spice paste from Indonesia, used widely in cooking throughout South East Asia."
 	icon = 'icons/obj/food/martian.dmi'
 	icon_state = "sambal"
-	trash_type = /obj/item/reagent_containers/cup/bowl
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 		/datum/reagent/consumable/capsaicin = 2
@@ -520,7 +519,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/takoyaki/russian
-	name = "Russian takoyaki"
+	name = "russian takoyaki"
 	desc = "A dangerous twist on a classic dish, that makes for the perfect cover for evading the police."
 	icon = 'icons/obj/food/martian.dmi'
 	icon_state = "russian_takoyaki"
@@ -536,7 +535,7 @@
 
 /obj/item/food/takoyaki/taco
 	name = "tacoyaki"
-	desc = "Straight outta Mars' most innovative street food stands, it's tacoyaki- trading octopus for taco meat and corn, and Worcestershire sauce for queso. ¡Tan sabroso!"
+	desc = "Straight outta Mars' most innovative street food stands, it's tacoyaki- trading octopus for taco meat and corn, and worcestershire sauce for queso. ¡Tan sabroso!"
 	icon = 'icons/obj/food/martian.dmi'
 	icon_state = "tacoyaki"
 	food_reagents = list(

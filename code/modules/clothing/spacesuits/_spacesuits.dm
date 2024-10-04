@@ -24,14 +24,6 @@
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 	resistance_flags = NONE
 	dog_fashion = null
-	slowdown = 0.5
-	///How much this helmet affects fishing difficulty
-	var/fishing_modifier = 3
-
-/obj/item/clothing/head/helmet/space/Initialize(mapload)
-	. = ..()
-	if(fishing_modifier)
-		AddComponent(/datum/component/adjust_fishing_difficulty, fishing_modifier)
 
 /datum/armor/helmet_space
 	bio = 100
@@ -55,7 +47,7 @@
 		/obj/item/tank/internals,
 		/obj/item/tank/jetpack/oxygen/captain,
 		)
-	slowdown = 0.5
+	slowdown = 1
 	armor_type = /datum/armor/suit_space
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = CHEST | GROIN | LEGS | FEET | ARMS | HANDS
@@ -77,8 +69,6 @@
 	var/thermal_on = FALSE
 	/// If this is FALSE the batery status UI will be disabled. This is used for suits that don't use bateries like the changeling's flesh suit mutation.
 	var/show_hud = TRUE
-	///How much this suit affects fishing difficulty
-	var/fishing_modifier = 5
 
 /datum/armor/suit_space
 	bio = 100
@@ -89,9 +79,6 @@
 	. = ..()
 	if(ispath(cell))
 		cell = new cell(src)
-
-	if(fishing_modifier)
-		AddComponent(/datum/component/adjust_fishing_difficulty, fishing_modifier)
 
 /// Start Processing on the space suit when it is worn to heat the wearer
 /obj/item/clothing/suit/space/equipped(mob/living/user, slot)

@@ -9,7 +9,9 @@
 	if(!owner || (bodypart_flags & BODYPART_UNREMOVABLE))
 		return FALSE
 	var/mob/living/carbon/limb_owner = owner
-	if(HAS_TRAIT(limb_owner, TRAIT_GODMODE) || HAS_TRAIT(limb_owner, TRAIT_NODISMEMBER))
+	if(limb_owner.status_flags & GODMODE)
+		return FALSE
+	if(HAS_TRAIT(limb_owner, TRAIT_NODISMEMBER))
 		return FALSE
 
 	var/obj/item/bodypart/affecting = limb_owner.get_bodypart(BODY_ZONE_CHEST)
@@ -229,6 +231,8 @@
 		for(var/obj/item/head_item as anything in list(owner.glasses, owner.ears, owner.wear_mask, owner.head))
 			owner.dropItemToGround(head_item, force = TRUE)
 
+	qdel(owner.GetComponent(/datum/component/creamed)) //clean creampie overlay flushed emoji
+
 	//Handle dental implants
 	for(var/datum/action/item_action/activate_pill/pill_action in owner.actions)
 		pill_action.Remove(owner)
@@ -400,12 +404,12 @@
 				qdel(phantom_loss)
 
 		//Copied from /datum/species/proc/on_species_gain()
-		for(var/obj/item/organ/organ_path as anything in dna.species.mutant_organs)
+		for(var/obj/item/organ/external/organ_path as anything in dna.species.external_organs)
 			//Load a persons preferences from DNA
 			var/zone = initial(organ_path.zone)
 			if(zone != limb_zone)
 				continue
-			var/obj/item/organ/new_organ = SSwardrobe.provide_type(organ_path)
+			var/obj/item/organ/external/new_organ = SSwardrobe.provide_type(organ_path)
 			new_organ.Insert(src)
 
 		update_body_parts()

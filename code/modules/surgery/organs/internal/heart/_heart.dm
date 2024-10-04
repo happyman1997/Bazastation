@@ -3,7 +3,7 @@
 	desc = "I feel bad for the heartless bastard who lost this."
 	icon_state = "heart-on"
 	base_icon_state = "heart"
-
+	visual = FALSE
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_HEART
 	item_flags = NO_BLOOD_ON_ITEM
@@ -115,11 +115,11 @@
 		if(beat != BEAT_SLOW)
 			beat = BEAT_SLOW
 			to_chat(owner, span_notice("You feel your heart slow down..."))
-			SEND_SOUND(owner, sound('sound/effects/health/slowbeat.ogg', repeat = TRUE, channel = CHANNEL_HEARTBEAT, volume = 40))
+			SEND_SOUND(owner, sound('sound/health/slowbeat.ogg', repeat = TRUE, channel = CHANNEL_HEARTBEAT, volume = 40))
 
 	else if(owner.stat == HARD_CRIT)
 		if(beat != BEAT_FAST && owner.has_status_effect(/datum/status_effect/jitter))
-			SEND_SOUND(owner, sound('sound/effects/health/fastbeat.ogg', repeat = TRUE, channel = CHANNEL_HEARTBEAT, volume = 40))
+			SEND_SOUND(owner, sound('sound/health/fastbeat.ogg', repeat = TRUE, channel = CHANNEL_HEARTBEAT, volume = 40))
 			beat = BEAT_FAST
 
 	else if(beat != BEAT_NONE)

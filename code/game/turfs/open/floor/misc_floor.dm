@@ -17,17 +17,12 @@
 /turf/open/floor/circuit/Initialize(mapload)
 	SSmapping.nuke_tiles += src
 	RegisterSignal(loc, COMSIG_AREA_POWER_CHANGE, PROC_REF(handle_powerchange))
-	var/area/cur_area = get_area(src)
-	if (!isnull(cur_area))
-		handle_powerchange(cur_area, TRUE)
+	handle_powerchange(loc)
 	. = ..()
 
 /turf/open/floor/circuit/Destroy()
 	SSmapping.nuke_tiles -= src
 	UnregisterSignal(loc, COMSIG_AREA_POWER_CHANGE)
-	var/area/cur_area = get_area(src)
-	if(on && !isnull(cur_area))
-		cur_area.removeStaticPower(CIRCUIT_FLOOR_POWERUSE, AREA_USAGE_STATIC_LIGHT)
 	return ..()
 
 /turf/open/floor/circuit/update_appearance(updates)
@@ -52,7 +47,7 @@
 	handle_powerchange(new_area)
 
 /// Enables/disables our lighting based off our source area
-/turf/open/floor/circuit/proc/handle_powerchange(area/source, mapload = FALSE)
+/turf/open/floor/circuit/proc/handle_powerchange(area/source)
 	SIGNAL_HANDLER
 	var/old_on = on
 	if(always_off)
@@ -64,7 +59,7 @@
 
 	if(on)
 		source.addStaticPower(CIRCUIT_FLOOR_POWERUSE, AREA_USAGE_STATIC_LIGHT)
-	else if (!mapload)
+	else
 		source.removeStaticPower(CIRCUIT_FLOOR_POWERUSE, AREA_USAGE_STATIC_LIGHT)
 	update_appearance()
 
@@ -256,14 +251,6 @@
 /turf/open/floor/plating/rust/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/rust)
-	color = null
-
-/turf/open/floor/plating/heretic_rust
-	color = COLOR_GREEN_GRAY
-
-/turf/open/floor/plating/heretic_rust/Initialize(mapload)
-	. = ..()
-	AddElement(/datum/element/rust/heretic)
 	color = null
 
 /turf/open/floor/plating/plasma

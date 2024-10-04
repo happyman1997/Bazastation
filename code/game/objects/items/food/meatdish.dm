@@ -36,36 +36,6 @@
 	w_class = WEIGHT_CLASS_SMALL
 	starting_reagent_purity = 1.0
 
-/obj/item/food/fishmeat/quality
-	name = "quality fish fillet"
-	desc = "A fillet of some precious fish meat."
-	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 4,
-		/datum/reagent/consumable/nutriment/vitamin = 3,
-	)
-	bite_consumption = 7
-	crafting_complexity = FOOD_COMPLEXITY_1
-
-/obj/item/food/fishmeat/quality/Initialize(mapload)
-	. = ..()
-	AddElement(/datum/element/quality_food_ingredient, FOOD_COMPLEXITY_1)
-
-/obj/item/food/fishmeat/salmon
-	name = "salmon fillet"
-	desc = "a chunky, fatty fillet of salmon meat."
-	icon_state = "salmon"
-	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 4,
-		/datum/reagent/consumable/nutriment/vitamin = 3,
-		/datum/reagent/consumable/nutriment/fat = 2,
-	)
-	bite_consumption = 4.5
-	crafting_complexity = FOOD_COMPLEXITY_1
-
-/obj/item/food/fishmeat/salmon/Initialize(mapload)
-	. = ..()
-	AddElement(/datum/element/quality_food_ingredient, FOOD_COMPLEXITY_1)
-
 /obj/item/food/fishmeat/carp
 	name = "carp fillet"
 	desc = "A fillet of spess carp meat."
@@ -99,19 +69,13 @@
 
 /obj/item/food/fishmeat/gunner_jellyfish
 	name = "filleted gunner jellyfish"
-	desc = "A gunner jellyfish with the stingers removed. Mildly hallucinogenic when raw."
+	desc = "A gunner jellyfish with the stingers removed. Mildly hallucinogenic."
 	icon = 'icons/obj/food/lizard.dmi'
 	icon_state = "jellyfish_fillet"
 	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 4, //The halluginogen comes from the fish trait.
+		/datum/reagent/consumable/nutriment/protein = 4,
+		/datum/reagent/toxin/mindbreaker = 2,
 	)
-
-///Premade gunner jellyfish fillets from supply orders. Contains the halluginogen that'd be normally from the fish trait.
-/obj/item/food/fishmeat/gunner_jellyfish/supply
-
-/obj/item/food/fishmeat/gunner_jellyfish/supply/Initialize(mapload)
-	food_reagents[/datum/reagent/toxin/mindbreaker/fish] = 2
-	return ..()
 
 /obj/item/food/fishmeat/armorfish
 	name = "cleaned armorfish"
@@ -527,7 +491,7 @@
 
 /obj/item/food/patty
 	name = "patty"
-	desc = "The Nanotrasen patty is the patty for you and me!"
+	desc = "The nanotrasen patty is the patty for you and me!"
 	icon = 'icons/obj/food/meat.dmi'
 	icon_state = "patty"
 	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 2)
@@ -536,7 +500,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_1
 
-///Exists purely for the crafting recipe (because it'll take subtypes)
+///Exists purely for the crafting recipe (because itll take subtypes)
 /obj/item/food/patty/plain
 
 /obj/item/food/patty/human
@@ -752,21 +716,12 @@
 	w_class = WEIGHT_CLASS_TINY
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_1
-	var/meat_source = "\"chicken\""
 
 /obj/item/food/nugget/Initialize(mapload)
 	. = ..()
 	var/shape = pick("lump", "star", "lizard", "corgi")
-	desc = "A [meat_source] nugget vaguely shaped like a [shape]."
+	desc = "A \"chicken\" nugget vaguely shaped like a [shape]."
 	icon_state = "nugget_[shape]"
-
-///subtype harvested from fish caught from, you guess it, the deepfryer
-/obj/item/food/nugget/fish
-	name = "fish nugget"
-	tastes = list("fried fish" = 1)
-	foodtypes = MEAT|SEAFOOD|FRIED
-	venue_value = FOOD_PRICE_NORMAL
-	meat_source = "fish"
 
 /obj/item/food/pigblanket
 	name = "pig in a blanket"
@@ -940,10 +895,9 @@
 
 /obj/item/food/beef_stroganoff
 	name = "beef stroganoff"
-	desc = "A Russian dish that consists of beef and sauce. Really popular in Japan, or at least that's what my animes would allude to."
+	desc = "A russian dish that consists of beef and sauce. Really popular in japan, or at least that's what my animes would allude to."
 	icon = 'icons/obj/food/meat.dmi'
 	icon_state = "beefstroganoff"
-	trash_type = /obj/item/reagent_containers/cup/bowl
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment/protein = 16,
 		/datum/reagent/consumable/nutriment/vitamin = 4,
@@ -1122,7 +1076,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_5
 
 /obj/item/food/full_english
-	name = "full English breakfast"
+	name = "full english breakfast"
 	desc = "A hearty plate with all the trimmings, representing the pinnacle of the breakfast art."
 	icon = 'icons/obj/food/meat.dmi'
 	icon_state = "full_english"

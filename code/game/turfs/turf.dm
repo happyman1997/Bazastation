@@ -3,7 +3,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 /// Any floor or wall. What makes up the station and the rest of the map.
 /turf
 	icon = 'icons/turf/floors.dmi'
-	datum_flags = DF_STATIC_OBJECT
 	vis_flags = VIS_INHERIT_ID // Important for interaction with and visualization of openspace.
 	luminosity = 1
 	light_height = LIGHTING_HEIGHT_FLOOR
@@ -32,7 +31,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	var/temperature = T20C
 	///Used for fire, if a melting temperature was reached, it will be destroyed
 	var/to_be_destroyed = 0
-	///The max temperature of the fire which it was subjected to, determines the melting point of turf
+	///The max temperature of the fire which it was subjected to
 	var/max_fire_temperature_sustained = 0
 
 	var/blocks_air = FALSE
@@ -47,7 +46,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	var/requires_activation //add to air processing after initialize?
 	var/changing_turf = FALSE
 
-	var/bullet_bounce_sound = 'sound/items/weapons/gun/general/mag_bullet_remove.ogg' //sound played when a shell casing is ejected ontop of the turf.
+	var/bullet_bounce_sound = 'sound/weapons/gun/general/mag_bullet_remove.ogg' //sound played when a shell casing is ejected ontop of the turf.
 	var/bullet_sizzle = FALSE //used by ammo_casing/bounce_away() to determine if the shell casing should make a sizzle sound when it's ejected over the turf
 							//IE if the turf is supposed to be water, set TRUE.
 
@@ -231,7 +230,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 
 /// Call to move a turf from its current area to a new one
 /turf/proc/change_area(area/old_area, area/new_area)
-	//don't waste our time
+	//dont waste our time
 	if(old_area == new_area)
 		return
 
@@ -277,7 +276,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		// We don't want to block ourselves
 		if((movable_content == source_atom))
 			continue
-		// don't consider ignored atoms or their types
+		// dont consider ignored atoms or their types
 		if(length(ignore_atoms))
 			if(!type_list && (movable_content in ignore_atoms))
 				continue
@@ -306,7 +305,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 			return TRUE
 	return FALSE
 
-//The zpass procs exist to be overridden, not directly called
+//The zpass procs exist to be overriden, not directly called
 //use can_z_pass for that
 ///If we'd allow anything to travel into us
 /turf/proc/zPassIn(direction)
@@ -426,7 +425,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 			if(thing == mover || thing == mover_loc) // Multi tile objects and moving out of other objects
 				continue
 			if(!thing.Cross(mover))
-				if(QDELETED(mover)) //deleted from Cross() (CanPass is pure so it can't delete, Cross shouldn't be doing this either though, but it can happen)
+				if(QDELETED(mover)) //deleted from Cross() (CanPass is pure so it cant delete, Cross shouldnt be doing this either though, but it can happen)
 					return FALSE
 				if(mover_is_phasing)
 					mover.Bump(thing)

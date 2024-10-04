@@ -63,6 +63,7 @@
 		return
 	user.visible_message(span_notice("[user] removes [cell] from [src]!"), span_notice("You remove [cell]."))
 	user.put_in_hands(cell)
+	cell.update_appearance()
 	cell = null
 	add_fingerprint(user)
 

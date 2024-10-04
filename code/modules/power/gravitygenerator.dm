@@ -78,7 +78,6 @@ GLOBAL_LIST_EMPTY(gravity_generators)
 /obj/machinery/gravity_generator/part/Destroy()
 	atom_break()
 	if(main_part)
-		main_part.generator_parts -= src
 		UnregisterSignal(main_part, COMSIG_ATOM_UPDATED_ICON)
 		main_part = null
 	return ..()
@@ -289,7 +288,7 @@ GLOBAL_LIST_EMPTY(gravity_generators)
 
 	return data
 
-/obj/machinery/gravity_generator/main/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+/obj/machinery/gravity_generator/main/ui_act(action, params)
 	. = ..()
 	if(.)
 		return

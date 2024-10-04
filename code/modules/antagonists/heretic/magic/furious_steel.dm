@@ -7,11 +7,11 @@
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "furious_steel"
-	sound = 'sound/items/weapons/guillotine.ogg'
+	sound = 'sound/weapons/guillotine.ogg'
 
 	school = SCHOOL_FORBIDDEN
 	cooldown_time = 60 SECONDS
-	invocation = "F'LSH'NG S'LV'R!"
+	invocation = "Ham'sana-qasep!"
 	invocation_type = INVOCATION_SHOUT
 
 	spell_requirements = NONE
@@ -155,7 +155,7 @@
 	overlay_icon_state = "bg_cult_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "cursed_steel"
-	sound = 'sound/items/weapons/guillotine.ogg'
+	sound = 'sound/weapons/guillotine.ogg'
 
 	cooldown_time = 40 SECONDS
 	invocation = "IA!"

@@ -1,13 +1,11 @@
 #define RESTART_COUNTER_PATH "data/round_counter.txt"
-/// Load byond-tracy. If USE_BYOND_TRACY is defined, then this is ignored and byond-tracy is always loaded.
-#define USE_TRACY_PARAMETER "tracy"
+
 /// Force the log directory to be something specific in the data/logs folder
 #define OVERRIDE_LOG_DIRECTORY_PARAMETER "log-directory"
 /// Prevent the master controller from starting automatically
 #define NO_INIT_PARAMETER "no-init"
 
 GLOBAL_VAR(restart_counter)
-GLOBAL_VAR(tracy_log)
 
 /**
  * WORLD INITIALIZATION
@@ -69,12 +67,10 @@ GLOBAL_VAR(tracy_log)
 #ifdef USE_BYOND_TRACY
 #warn USE_BYOND_TRACY is enabled
 	if(!tracy_initialized)
-#else
-	if(!tracy_initialized && (USE_TRACY_PARAMETER in params))
-#endif
-		GLOB.tracy_log = init_byond_tracy()
+		init_byond_tracy()
 		Genesis(tracy_initialized = TRUE)
 		return
+#endif
 
 	Profile(PROFILE_RESTART)
 	Profile(PROFILE_RESTART, type = "sendmaps")
@@ -221,9 +217,6 @@ GLOBAL_VAR(tracy_log)
 
 	logger.init_logging()
 
-	if(GLOB.tracy_log)
-		rustg_file_write("[GLOB.tracy_log]", "[GLOB.log_directory]/tracy.loc")
-
 	var/latest_changelog = file("[global.config.directory]/../html/changelogs/archive/" + time2text(world.timeofday, "YYYY-MM") + ".yml")
 	GLOB.changelog_hash = fexists(latest_changelog) ? md5(latest_changelog) : 0 //for telling if the changelog has changed recently
 
@@ -346,6 +339,7 @@ GLOBAL_VAR(tracy_log)
 	#endif
 
 /world/proc/auxcleanup()
+	AUXTOOLS_FULL_SHUTDOWN(AUXLUA)
 	var/debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
 	if (debug_server)
 		call_ext(debug_server, "auxtools_shutdown")()
@@ -416,7 +410,7 @@ GLOBAL_VAR(tracy_log)
 		hub_password = "SORRYNOPASSWORD"
 
 /**
- * Handles increasing the world's maxx var and initializing the new turfs and assigning them to the global area.
+ * Handles incresing the world's maxx var and intializing the new turfs and assigning them to the global area.
  * If map_load_z_cutoff is passed in, it will only load turfs up to that z level, inclusive.
  * This is because maploading will handle the turfs it loads itself.
  */
@@ -443,7 +437,7 @@ GLOBAL_VAR(tracy_log)
 	maxy = new_maxy
 	if(!map_load_z_cutoff)
 		return
-	var/area/global_area = GLOB.areas_by_type[world.area] // We're guaranteed to be touching the global area, so we'll just do this
+	var/area/global_area = GLOB.areas_by_type[world.area] // We're guarenteed to be touching the global area, so we'll just do this
 	LISTASSERTLEN(global_area.turfs_by_zlevel, map_load_z_cutoff, list())
 	for (var/zlevel in 1 to map_load_z_cutoff)
 		var/list/to_add = block(
@@ -478,7 +472,6 @@ GLOBAL_VAR(tracy_log)
 
 /world/proc/on_tickrate_change()
 	SStimer?.reset_buckets()
-	DREAMLUAU_SET_EXECUTION_LIMIT_MILLIS(tick_lag * 100)
 
 /world/proc/init_byond_tracy()
 	var/library
@@ -492,9 +485,7 @@ GLOBAL_VAR(tracy_log)
 			CRASH("Unsupported platform: [system_type]")
 
 	var/init_result = call_ext(library, "init")("block")
-	if(length(init_result) != 0 && init_result[1] == ".") // if first character is ., then it returned the output filename
-		return init_result
-	else if(init_result != "0")
+	if (init_result != "0")
 		CRASH("Error initializing byond-tracy: [init_result]")
 
 /world/proc/init_debugger()
@@ -509,5 +500,4 @@ GLOBAL_VAR(tracy_log)
 
 #undef NO_INIT_PARAMETER
 #undef OVERRIDE_LOG_DIRECTORY_PARAMETER
-#undef USE_TRACY_PARAMETER
 #undef RESTART_COUNTER_PATH

@@ -159,9 +159,7 @@
 
 	var/duration = (total_time / rating_speed)
 	INVOKE_ASYNC(src, TYPE_PROC_REF(/atom, Shake), 1, 0, duration)
-	addtimer(CALLBACK(src, PROC_REF(complete_processing)), duration)
-
-/obj/machinery/processor/proc/complete_processing()
+	sleep(duration)
 	for(var/atom/movable/content_item in processor_contents)
 		var/datum/food_processor_process/recipe = PROCESSOR_SELECT_RECIPE(content_item)
 		if (!recipe)

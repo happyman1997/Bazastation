@@ -309,7 +309,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 		belt_item.use(1)
 		new /obj/machinery/conveyor(target_turf, forwards, id)
 
-	else if(!user.combat_mode || (attacking_item.item_flags & NOBLUDGEON))
+	else if(!user.combat_mode)
 		user.transferItemToLoc(attacking_item, drop_location())
 	else
 		return ..()
@@ -434,8 +434,6 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 /// Updates the switch's `position` and `last_pos` variable. Useful so that the switch can properly cycle between the forwards, backwards and neutral positions.
 /obj/machinery/conveyor_switch/proc/update_position(direction)
 	if(position == CONVEYOR_OFF)
-		playsound(src, 'sound/machines/lever/lever_start.ogg', 40, TRUE)
-
 		if(oneway)   //is it a oneway switch
 			position = oneway
 		else
@@ -444,7 +442,6 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 			else
 				position = CONVEYOR_BACKWARDS
 	else
-		playsound(src, 'sound/machines/lever/lever_stop.ogg', 40, TRUE)
 		position = CONVEYOR_OFF
 
 /obj/machinery/conveyor_switch/proc/on_user_activation(mob/user, direction)
@@ -606,7 +603,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 
 /obj/item/stack/conveyor/use(used, transfer, check)
 	. = ..()
-	playsound(src, 'sound/items/weapons/genhit.ogg', 30, TRUE)
+	playsound(src, 'sound/weapons/genhit.ogg', 30, TRUE)
 
 /obj/item/stack/conveyor/thirty
 	amount = 30

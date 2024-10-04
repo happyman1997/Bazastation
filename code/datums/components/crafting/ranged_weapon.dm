@@ -77,7 +77,7 @@
 	reqs = list(
 		/obj/item/assembly/signaler/anomaly/flux = 2,
 		/obj/item/assembly/signaler/anomaly/grav = 1,
-		/obj/item/assembly/signaler/anomaly/vortex = (MAX_CORES_VORTEX - 1),
+		/obj/item/assembly/signaler/anomaly/vortex = MAX_CORES_VORTEX,
 		/obj/item/assembly/signaler/anomaly/bluespace = 1,
 		/obj/item/weaponcrafting/gunkit/beam_rifle = 1,
 	)
@@ -299,22 +299,6 @@
 	time = 5 SECONDS
 	category = CAT_WEAPON_RANGED
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
-
-/datum/crafting_recipe/pipe_organ_gun
-	name = "Pipe Organ Gun"
-	tool_behaviors = list(TOOL_WELDER, TOOL_SCREWDRIVER)
-	result = /obj/structure/mounted_gun/pipe
-	reqs = list(
-		/obj/item/pipe = 8,
-		/obj/item/stack/sheet/mineral/wood = 15,
-		/obj/item/stack/sheet/iron = 10,
-		/obj/item/storage/toolbox = 1,
-		/obj/item/stack/rods = 10,
-		/obj/item/assembly/igniter = 2,
-	)
-	time = 15 SECONDS
-	category = CAT_WEAPON_RANGED
-	crafting_flags = CRAFT_CHECK_DENSITY
 
 /datum/crafting_recipe/trash_cannon
 	name = "Trash Cannon"
