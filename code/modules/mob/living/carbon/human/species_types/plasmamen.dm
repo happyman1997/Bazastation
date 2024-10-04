@@ -68,6 +68,11 @@
 	/// If the bones themselves are burning clothes won't help you much
 	var/internal_fire = FALSE
 
+/datum/species/plasmaman/on_species_gain(mob/living/carbon/human/human_who_gained_species, datum/species/old_species, pref_load)
+	. = ..()
+	var/datum/action/cooldown/spell/plasmaman_braintrauma/for_me = new /datum/action/cooldown/spell/plasmaman_braintrauma()
+	for_me.Grant(human_who_gained_species)
+
 /datum/species/plasmaman/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()
 	var/atmos_sealed = TRUE
@@ -210,3 +215,23 @@
 	)
 
 	return to_add
+
+/datum/action/cooldown/spell/plasmaman_braintrauma
+	name = "Brain Lobe Division"
+	desc = "Lobe your brain to get on of two random traumas: imaginary friend and split personality"
+	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon_state = "plasmaman_braintrauma"
+	spell_requirements = null
+	var/list/traumas_to_pick = list(
+		/datum/brain_trauma/special/imaginary_friend,
+		/datum/brain_trauma/severe/split_personality,
+	)
+
+/datum/action/cooldown/spell/plasmaman_braintrauma/cast(atom/cast_on)
+	. = ..()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/what_im_not_human_im_plasmaman = owner
+	var/datum/brain_trauma/what_we_gain = what_im_not_human_im_plasmaman.gain_trauma(pick(traumas_to_pick))
+	to_chat(owner, span_notice("You concentrate your brain muscles and lobe it. Now you have [what_we_gain]"))
+	qdel(src)
